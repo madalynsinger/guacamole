@@ -1,0 +1,15 @@
+<script lang="ts">
+    import '@picocss/pico'
+</script>
+
+<nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/register">Register</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/auth">Auth</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<slot />
