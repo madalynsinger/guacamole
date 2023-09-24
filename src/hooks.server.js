@@ -1,10 +1,9 @@
 import PocketBase from 'pocketbase'
-import {SECRET_EMAIL, SECRET_PASSWORD} from '$env/static/private';
+import {SECRET_EMAIL, SECRET_PASSWORD, PB_URL} from '$env/static/private';
 
 export const handle = async ({event, resolve}) => {
-    const pbUrl = "http://127.0.0.1:8090";
-    const adminPb = new PocketBase(pbUrl);
-    const userPb = new PocketBase(pbUrl);
+    const adminPb = new PocketBase(PB_URL);
+    const userPb = new PocketBase(PB_URL);
 
     // Sign in
     await adminPb.admins.authWithPassword(SECRET_EMAIL, SECRET_PASSWORD);
@@ -22,7 +21,6 @@ export const handle = async ({event, resolve}) => {
 
         // Spread the model to locals.user to be available in all pages
         event.locals.user = {...event.locals.userPb.authStore.model};
-        console.log("hooks: auth model", event.locals.userPb.authStore.model());
     } catch (err) {
         console.log("error in hooks", err);
         event.locals.userPb.authStore.clear();
